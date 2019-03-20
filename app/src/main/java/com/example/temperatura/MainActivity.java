@@ -15,11 +15,14 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     private double latitudeAtual;
     private double longitudeAtual;
-
+    private ArrayList<Localizacao> localizacoes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        localizacoes = new ArrayList<>();
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -47,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
-
 
                 /*   Uri gmmIntentUri =
                         Uri.parse(String.format("geo:%f,%f?q=restaurantes",
@@ -57,8 +60,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(mapIntent);
 */
 
-             Intent intent = new Intent(MainActivity.this,LIstLocalizacaoActivity.class);
-             startActivityForResult(intent,1);
+                //Intent intent = new Intent(MainActivity.this, LIstLocalizacaoActivity.class);
+                //startActivityForResult(intent, 1);
+                Intent intent = new Intent(MainActivity.this, LIstLocalizacaoActivity.class);
+                intent.putExtra("localizacoes", localizacoes);
+                startActivity(intent);
 
             }
         });
@@ -70,8 +76,16 @@ public class MainActivity extends AppCompatActivity {
             public void onLocationChanged(Location location) {
                 double lat = location.getLatitude();
                 double lon = location.getLongitude();
+                Localizacao localizacao = new Localizacao();
+                localizacao.setLatitude(latitudeAtual);
+                localizacao.setLongitude(longitudeAtual);
+                localizacoes.add(localizacao);
                 latitudeAtual = lat;
                 longitudeAtual = lon;
+                if(localizacoes.size() > 50){
+                    Log.e("Size",">50");
+                    localizacoes.remove(0);
+                }
                 lblLocalizacao.setText(String.format("Lat: %f, Long: %f", lat, lon));
             }
 
@@ -99,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 20000,
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000,
                     200, locationListener);
         } else {
             ActivityCompat.requestPermissions(this, new String[]
@@ -115,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 if (ActivityCompat.checkSelfPermission(this,
                         Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 200, locationListener);
                 }
             } else {
                 Toast.makeText(this, getString(R.string.msg_erro_temperatura), Toast.LENGTH_SHORT).show();
