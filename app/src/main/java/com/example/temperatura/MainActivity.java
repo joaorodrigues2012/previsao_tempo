@@ -47,12 +47,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
-                Uri gmmIntentUri =
+
+
+                /*   Uri gmmIntentUri =
                         Uri.parse(String.format("geo:%f,%f?q=restaurantes",
                                 latitudeAtual, longitudeAtual));
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
                 startActivity(mapIntent);
+*/
+
+             Intent intent = new Intent(MainActivity.this,LIstLocalizacaoActivity.class);
+             startActivityForResult(intent,1);
 
             }
         });
@@ -93,8 +99,8 @@ public class MainActivity extends AppCompatActivity {
 
         if (ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,
-                    0, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 20000,
+                    200, locationListener);
         } else {
             ActivityCompat.requestPermissions(this, new String[]
                     {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_GPS);
