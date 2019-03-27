@@ -1,6 +1,4 @@
-/**
- * Uriel Henrique Marques Farias Mishima RA: 81717300
- */
+
 
 package com.example.temperatura;
 
