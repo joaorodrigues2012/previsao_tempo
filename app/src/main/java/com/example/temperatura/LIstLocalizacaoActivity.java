@@ -3,16 +3,22 @@ package com.example.temperatura;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class LIstLocalizacaoActivity extends AppCompatActivity {
 
-    private ListView localizacaoListView;
+    //private ListView localizacaoListView;
+    private RecyclerView localizaoRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,29 +29,31 @@ public class LIstLocalizacaoActivity extends AppCompatActivity {
         //String nomeFila = origemIntent.getStringExtra("localizacoes");
         //final List<String> chamados = busca(nomeFila);
         final ArrayList<Localizacao> localizacoes = (ArrayList<Localizacao>) origemIntent.getSerializableExtra("localizacoes");
-        localizacaoListView = findViewById(R.id.localizacaoListView);
+        localizaoRecyclerView = findViewById(R.id.localizacaoRecyclerView);
+        localizaoRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         //ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, chamados);
         //ArrayAdapter<Localizacao> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, localizacoes);
-        LocalizacaoArrayAdapter arrayAdapter = new LocalizacaoArrayAdapter(this,localizacoes);
-        localizacaoListView.setAdapter(arrayAdapter);
+        //LocalizacaoArrayAdapter arrayAdapter = new LocalizacaoArrayAdapter(this,localizacoes);
+        RecyclerViewAdapter  arrayAdapter = new RecyclerViewAdapter (localizacoes);
+        localizaoRecyclerView.setAdapter(arrayAdapter);
 
-        localizacaoListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //String chamado = chamados.get(position);
-                Localizacao localizacao = localizacoes.get(position);
-                String latAux = String.valueOf(localizacao.getLatitude()).replace(',','.');
-                String lonAux = String.valueOf(localizacao.getLongitude()).replace(',','.');
-                Uri gmmIntentUri = Uri.parse(String.format("geo:%f,%f,?q=%s,%s", localizacao.getLongitude(), localizacao.getLatitude(),latAux,lonAux));
-                //  Intent intent = new Intent(ListaChamadosActivity.this,DetalheChamadosActivity.class);
-                Intent Intent = new Intent(android.content.Intent.ACTION_VIEW, gmmIntentUri);
-              //  intent.putExtra("chamado_escolhido",chamado);
-                Intent.setPackage("com.google.android.apps.maps");
-              //  startActivity(intent);
-                startActivity(Intent);
-
-            }
-        });
+//        localizaoRecyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                //String chamado = chamados.get(position);
+//                Localizacao localizacao = localizacoes.get(position);
+//                String latAux = String.valueOf(localizacao.getLatitude()).replace(',','.');
+//                String lonAux = String.valueOf(localizacao.getLongitude()).replace(',','.');
+//                Uri gmmIntentUri = Uri.parse(String.format("geo:%f,%f,?q=%s,%s", localizacao.getLongitude(), localizacao.getLatitude(),latAux,lonAux));
+//                //  Intent intent = new Intent(ListaChamadosActivity.this,DetalheChamadosActivity.class);
+//                Intent Intent = new Intent(android.content.Intent.ACTION_VIEW, gmmIntentUri);
+//              //  intent.putExtra("chamado_escolhido",chamado);
+//                Intent.setPackage("com.google.android.apps.maps");
+//              //  startActivity(intent);
+//                startActivity(Intent);
+//
+//            }
+//        });
     }
 
 //    public List<String> busca(String nomeFila) {
