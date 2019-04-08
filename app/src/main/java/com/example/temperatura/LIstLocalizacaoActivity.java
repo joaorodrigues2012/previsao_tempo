@@ -24,7 +24,8 @@ public class LIstLocalizacaoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_localizacao);
-
+        localizaoRecyclerView = findViewById(R.id.localizacaoRecyclerView);
+        localizaoRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         Intent origemIntent = getIntent();
         //String nomeFila = origemIntent.getStringExtra("localizacoes");
         //final List<String> chamados = busca(nomeFila);
@@ -34,8 +35,8 @@ public class LIstLocalizacaoActivity extends AppCompatActivity {
         //ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, chamados);
         //ArrayAdapter<Localizacao> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, localizacoes);
         //LocalizacaoArrayAdapter arrayAdapter = new LocalizacaoArrayAdapter(this,localizacoes);
-        RecyclerViewAdapter  arrayAdapter = new RecyclerViewAdapter (localizacoes);
-        localizaoRecyclerView.setAdapter(arrayAdapter);
+        LocalizacaoRecyclerViewAdapter  adapter = new LocalizacaoRecyclerViewAdapter (localizacoes);
+        localizaoRecyclerView.setAdapter(adapter);
 
 //        localizaoRecyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override

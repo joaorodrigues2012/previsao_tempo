@@ -33,8 +33,8 @@ public class LocalizacaoRecyclerViewAdapter extends RecyclerView.Adapter<Localiz
         @Override
         public void onBindViewHolder(@NonNull LocalizacaoViewHolder localizacaoViewHolder, int i) {
             Localizacao localiza = localizacaos.get(i);
-            localizacaoViewHolder.latitudeTextView.setText(localiza.toString());
-            localizacaoViewHolder.longitudeTextView.setText(localiza.toString());
+                localizacaoViewHolder.latitudeTextView.setText("Latitude: " + localiza.getLatitude());
+                localizacaoViewHolder.longitudeTextView.setText("Longitude: " + localiza.getLongitude()+"\n");
         }
 
 }

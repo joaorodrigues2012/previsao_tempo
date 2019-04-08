@@ -22,18 +22,25 @@ public class LocalizacaoArrayAdapter extends ArrayAdapter<Localizacao> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         //Localizacao localizacao = getItem(position);
-        RecyclerView.ViewHolder vh = null;
+        ViewHolder vh = null;
         if(convertView == null){
             Context context = getContext();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.list_item, parent, false);
-            vh = new
+            vh = new ViewHolder();
+            vh.latitude = convertView.findViewById(R.id.latitudeTextView);
+            vh.longitude = convertView.findViewById(R.id.longitudeTextView);
+            convertView.setTag(vh);
         }
-        TextView latitude = convertView.findViewById(R.id.latitudeTextView);
-        TextView longitude = convertView.findViewById(R.id.longitudeTextView);
+//        TextView latitude = convertView.findViewById(R.id.latitudeTextView);
+//        TextView longitude = convertView.findViewById(R.id.longitudeTextView);
 
        // latitude.setText("Latitude: " + localizacao.getLatitude());
        // longitude.setText("Longitude: " + localizacao.getLongitude());
+        vh = (ViewHolder) convertView.getTag();
+        Localizacao localizacao = getItem(position);
+        vh.longitude.setText("Latitude"+ localizacao.getLongitude());
+        vh.latitude.setText("Longitude: " + localizacao.getLatitude());
         return convertView;
     }
 
