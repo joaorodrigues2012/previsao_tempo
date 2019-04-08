@@ -19,10 +19,12 @@ public class LIstLocalizacaoActivity extends AppCompatActivity {
 
     //private ListView localizacaoListView;
     private RecyclerView localizaoRecyclerView;
+    private LocalizacaoDAO dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //dao = LocalizacaoDAO(localizaoRecyclerView);
         setContentView(R.layout.activity_list_localizacao);
         localizaoRecyclerView = findViewById(R.id.localizacaoRecyclerView);
         localizaoRecyclerView.setLayoutManager(new LinearLayoutManager(this));

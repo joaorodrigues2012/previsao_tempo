@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             public void onLocationChanged(Location location) {
                 double lat = location.getLatitude();
                 double lon = location.getLongitude();
-                Localizacao localizacao = new Localizacao();
+                Localizacao localizacao = new Localizacao(lat,lon);
                 localizacao.setLatitude(latitudeAtual);
                 localizacao.setLongitude(longitudeAtual);
                 localizacoes.add(localizacao);
