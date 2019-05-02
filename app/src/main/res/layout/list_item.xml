@@ -25,7 +25,7 @@
         <GridLayout
             android:layout_width="wrap_content"
             android:layout_height="100dp"
-            android:columnCount="3"
+            android:columnCount="4"
             android:rowCount="4"
             android:useDefaultMargins="true">
 
@@ -35,7 +35,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:layout_gravity="center"
-                tools:text="LatitudeTextView" />
+                tools:text="LatitudeTextView"
+                android:layout_column="0"
+                android:layout_row="0"
+                android:layout_columnWeight="1"/>
 
             <TextView
                 android:id="@+id/longitudeTextView"
@@ -43,45 +46,48 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:layout_gravity="center"
-                tools:text="LongitudeTextView" />
+                android:layout_column="0"
+                android:layout_row="1"
+                tools:text="LongitudeTextView"
+                android:layout_columnWeight="1"/>
 
-            <!--<TextView-->
-                <!--android:id="@+id/dayTextView"-->
-                <!--android:layout_column="0"-->
-                <!--android:layout_row="0"-->
-                <!--android:layout_columnSpan="3"-->
-                <!--android:gravity="center"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="fill_horizontal"-->
-                <!--android:textAppearance="?android:attr/textAppearanceLarge"/>-->
-            <!--<TextView-->
-                <!--android:id="@+id/lowTextView"-->
-                <!--android:layout_column="0"-->
-                <!--android:layout_row="1"-->
-                <!--android:gravity="center"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_columnWeight="1"-->
-                <!--/>-->
-            <!--<TextView-->
-                <!--android:id="@+id/highTextView"-->
-                <!--android:layout_column="1"-->
-                <!--android:layout_row="1"-->
-                <!--android:gravity="center"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_columnWeight="1"-->
-                <!--/>-->
-            <!--<TextView-->
-                <!--android:id="@+id/humidityTextView"-->
-                <!--android:layout_column="2"-->
-                <!--android:layout_row="1"-->
-                <!--android:gravity="center"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_columnWeight="1"-->
-                <!--/>-->
+            <TextView
+                android:id="@+id/dayTextView"
+                android:layout_column="1"
+                android:layout_row="1"
+                android:layout_columnSpan="3"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="fill_horizontal"
+                />
+            <TextView
+                android:id="@+id/lowTextView"
+                android:layout_column="2"
+                android:layout_row="0"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                />
+            <TextView
+                android:id="@+id/highTextView"
+                android:layout_column="2"
+                android:layout_row="1"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                />
+            <TextView
+                android:id="@+id/humidityTextView"
+                android:layout_column="2"
+                android:layout_row="2"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                />
 
         </GridLayout>
     </LinearLayout>

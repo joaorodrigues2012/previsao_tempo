@@ -1,6 +1,7 @@
 package com.example.temperatura;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
         weatherRecyclerView = findViewById(R.id.weatherRecyclerView);
         previsoes = new ArrayList<>();
-//        previsoes.add(new Weather(500, 37, 38, 0.7, "Teste 1", ""));
+        previsoes.add(new Weather(500, 37, 38, 0.7, "Teste 1", ""));
         adapter = new WeatherAdapter(previsoes, this);
         weatherRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         weatherRecyclerView.setAdapter(adapter);
@@ -103,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("localizacoes", localizacoes);
                 startActivity(intent);
 
+
             }
         });
 
@@ -123,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.e("Size", ">50");
                     localizacoes.remove(0);
                 }
+                obtemPrevisoesV5(lat,lon);
                 lblLocalizacao.setText(String.format("Lat: %f, Long: %f", lat, lon));
             }
 
@@ -178,10 +181,11 @@ public class MainActivity extends AppCompatActivity {
 
     //TESTANDO o json
 
-    public void obtemPrevisoesV5(String cidade) {
-        String url = getString(
+    public void obtemPrevisoesV5(Double lat, Double lon) {
+        @SuppressLint("StringFormatMatches") String url = getString(
                 R.string.web_service_url,
-                cidade,
+                lat,
+                lon,
                 getString(R.string.api_key)
         );
         JsonObjectRequest req = new JsonObjectRequest(

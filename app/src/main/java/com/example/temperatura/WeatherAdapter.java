@@ -86,14 +86,14 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherV
         public WeatherViewHolder (View raiz){
             super(raiz);
             coditionImageView = raiz.findViewById(R.id.conditionImageView);
-//            dayTextView =
-//                    raiz.findViewById(R.id.dayTextView);
-//            lowTextView =
-//                    raiz.findViewById(R.id.lowTextView);
-//            highTextView =
-//                    raiz.findViewById(R.id.highTextView);
-//            humidityTextView =
-//                    raiz.findViewById(R.id.humidityTextView);
+           dayTextView =
+                    raiz.findViewById(R.id.dayTextView);
+            lowTextView =
+                    raiz.findViewById(R.id.lowTextView);
+            highTextView =
+                    raiz.findViewById(R.id.highTextView);
+            humidityTextView =
+                    raiz.findViewById(R.id.humidityTextView);
 
         }
 
