@@ -31,6 +31,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     private List<Weather> previsoes;
     private RequestQueue requestQueue;
 
+    private Gson gson;
 
     private double latitudeAtual;
     private double longitudeAtual;
@@ -76,11 +79,19 @@ public class MainActivity extends AppCompatActivity {
 
         weatherRecyclerView = findViewById(R.id.weatherRecyclerView);
         previsoes = new ArrayList<>();
-        previsoes.add(new Weather(500, 37, 38, 0.7, "Teste 1", ""));
+
         adapter = new WeatherAdapter(previsoes, this);
+        weatherRecyclerView = findViewById(R.id.weatherRecyclerView);
         weatherRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         weatherRecyclerView.setAdapter(adapter);
+
+
+//        previsoes.add(new Weather(500, 37, 38, 0.7, "Teste 1", ""));
+//        adapter = new WeatherAdapter(previsoes, this);
+//        weatherRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        weatherRecyclerView.setAdapter(adapter);
         requestQueue = Volley.newRequestQueue(this);
+        gson = new GsonBuilder().create();
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -116,11 +127,12 @@ public class MainActivity extends AppCompatActivity {
                 double lat = location.getLatitude();
                 double lon = location.getLongitude();
                 Localizacao localizacao = new Localizacao(lat, lon);
-                localizacao.setLatitude(latitudeAtual);
-                localizacao.setLongitude(longitudeAtual);
-                localizacoes.add(localizacao);
+                obtemPrevisoesV5(lat,lon);
+                localizacao.setLatitude(lat);
+                localizacao.setLongitude(lon);
                 latitudeAtual = lat;
                 longitudeAtual = lon;
+                localizacoes.add(localizacao);
                 if (localizacoes.size() > 50) {
                     Log.e("Size", ">50");
                     localizacoes.remove(0);
@@ -184,8 +196,8 @@ public class MainActivity extends AppCompatActivity {
     public void obtemPrevisoesV5(Double lat, Double lon) {
         @SuppressLint("StringFormatMatches") String url = getString(
                 R.string.web_service_url,
-                lat,
-                lon,
+                lat.toString(),
+                lon.toString(),
                 getString(R.string.api_key)
         );
         JsonObjectRequest req = new JsonObjectRequest(

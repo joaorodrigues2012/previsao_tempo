@@ -14,6 +14,30 @@ public class Weather {
     public final String description;
     public final String iconURL;
 
+    public String getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public String getMinTemp() {
+        return minTemp;
+    }
+
+    public String getMaxTemp() {
+        return maxTemp;
+    }
+
+    public String getHumidity() {
+        return humidity;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getIconURL() {
+        return iconURL;
+    }
+
     public Weather(long timeStamp, double minTemp, double maxTemp, double humidity, String
             description, String iconName){
         NumberFormat numberFormat = NumberFormat.getInstance();

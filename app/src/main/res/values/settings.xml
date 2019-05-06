@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="api_key">ac1d745c1d0dde8fb9d3cea9a90413c0</string>
-    <string name="web_service_url">http://api.openweathermap.org/data/2.5/forecast?q=%s&amp;APPID=%s&amp;units=metric&amp;lang=pt
-    </string>
+    <string name="web_service_url">http://api.openweathermap.org/data/2.5/forecast?lat=%s&amp;lon=%s&amp;APPID=%s&amp;units=metric&amp;lang=pt</string>
     <string name="weather_condition_image">Graphical representation of weather conditions</string>
     <string name="hint_text">Type city name</string>
     <string name="day_description">%1$s: %2$s</string>
